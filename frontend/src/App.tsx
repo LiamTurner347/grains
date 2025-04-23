@@ -51,7 +51,7 @@ const App = () => {
       <APIProvider apiKey={API_KEY}>
         <div className="map-container">
           <Map
-            mapId={import.meta.env.VITE_GOOGLE_MAPS_MAP_ID}
+            mapId={import.meta.env.VITE_GOOGLE_MAPS_MAP_ID || "efcd29f65b26252"}
             defaultZoom={13}
             defaultCenter={{ lat: 53.95190272181878, lng: -1.08476205000001 }}
           >

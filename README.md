@@ -1,5 +1,5 @@
-<div>
-  <img src="./frontend/src/assets/logo-white-background.png" alt="Home Page" width="600">
+<div align="center">
+  <img src="./frontend/src/assets/logo-white-background.png" alt="Home Page" width="450">
 </div>
 <br>
 A restaurant dish recommendation engine using retrieval-augmented generation (RAG) to extract insights from Google Maps reviews.
@@ -81,25 +81,25 @@ Before setting up the project locally, ensure you have:
 1. The UI loads with a Google Maps panel (initially centered on Bishopthorpe Road, York, United Kingdom, unless configured otherwise). It should look something like this...
 
 <div>
-  <img src="./frontend/src/assets/homepage-view.png" alt="Home Page" width="800">
+  <img src="./frontend/src/assets/homepage-view.png" alt="Home Page" width="870">
 </div>
 
 2. Users can search for restaurants using the Google Maps search with autocomplete functionality
 
 <div>
-  <img src="./frontend/src/assets/restaurant-located.png" alt="Home Page" width="800">
+  <img src="./frontend/src/assets/restaurant-located.png" alt="Home Page" width="870">
 </div>
 
 3. Upon selecting a restaurant, users can click to discover the best dishes at that restaurant
 
 <div>
-  <img src="./frontend/src/assets/restaurant-searched.png" alt="Home Page" width="800">
+  <img src="./frontend/src/assets/restaurant-searched.png" alt="Home Page" width="870">
 </div>
 
 4. Results are displayed based on analysis of actual customer reviews
 
 <div>
-  <img src="./frontend/src/assets/best-dishes-results.png" alt="Home Page" width="800">
+  <img src="./frontend/src/assets/best-dishes-results.png" alt="Home Page" width="870">
 </div>
 
 Note: The process of connecting to Apify, downloading recent reviews, embedding those reviews, curating the most relevant reviews, providing those reviews and a prompt as context to OpenAI's Chat Completions API, validating the response received from OpenAI and then formatting and displaying that response in the UI can take some time. Loading messages are displayed in the UI to let the user know that these computations are happening behind the scenes.

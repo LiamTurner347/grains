@@ -3,10 +3,14 @@ import { useMapsLibrary } from "@vis.gl/react-google-maps";
 
 interface PlaceAutocompleteProps {
   onPlaceSelect: (place: google.maps.places.PlaceResult | null) => void;
+  disabled: boolean;
 }
 
 // The Autocomplete component provides search functionality for locations.
-const PlaceAutocomplete = ({ onPlaceSelect }: PlaceAutocompleteProps) => {
+const PlaceAutocomplete = ({
+  onPlaceSelect,
+  disabled,
+}: PlaceAutocompleteProps) => {
   const [placeAutocomplete, setPlaceAutocomplete] =
     useState<google.maps.places.Autocomplete | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -36,6 +40,12 @@ const PlaceAutocomplete = ({ onPlaceSelect }: PlaceAutocompleteProps) => {
     setPlaceAutocomplete(autocompleteInstance);
   }, [places]);
 
+  useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.disabled = disabled;
+    }
+  }, [disabled]);
+
   // When a user selects a place, the selected place details are passed back.
   // The selectedPlace state is updated to reflect.
   useEffect(() => {
@@ -48,7 +58,11 @@ const PlaceAutocomplete = ({ onPlaceSelect }: PlaceAutocompleteProps) => {
 
   return (
     <div className="autocomplete-container">
-      <input ref={inputRef} />
+      <input
+        ref={inputRef}
+        // placeholder={disabled ? "Loading..." : "Search for a restaurant"}
+        // className={disabled ? "input-disabled" : ""}
+      />
     </div>
   );
 };

@@ -57,19 +57,26 @@ vi.mock("./services/restaurants.ts");
 const mockedRestaurantService = vi.mocked({ getBestDishes }, true);
 
 // Mock the PlaceAutocomplete component to simulate a user selecting a restaurant
-// with the mockRestaurantData
+// with the mockRestaurantData and to simulate an input (textbox) which is disabled or
+// enabled based on the disabled property
 vi.mock("./components/PlaceAutocomplete", () => ({
   default: ({
     onPlaceSelect,
+    disabled,
   }: {
     onPlaceSelect: (place: MockPlaceResult) => void;
+    disabled: boolean;
   }) => (
-    <button
-      data-testid="autocomplete-button"
-      onClick={() => onPlaceSelect(mockRestaurantData)}
-    >
-      Search
-    </button>
+    <div>
+      <button
+        data-testid="autocomplete-button"
+        onClick={() => onPlaceSelect(mockRestaurantData)}
+        disabled={disabled}
+      >
+        Search
+      </button>
+      <input disabled={disabled} />
+    </div>
   ),
 }));
 
@@ -140,11 +147,9 @@ describe("App Component", () => {
 
     render(<App />);
 
-    // Mock autocompletion of selected place
     const autocompleteSelection = screen.getByTestId("autocomplete-button");
     await userEvent.click(autocompleteSelection);
 
-    // Click submit button
     const submitButton = screen.getByText(
       `Discover the best dishes at ${mockRestaurantData.name}`
     );
@@ -175,11 +180,9 @@ describe("App Component", () => {
 
     render(<App />);
 
-    // Mock autocompletion of selected place
     const autocompleteSelection = screen.getByTestId("autocomplete-button");
     await userEvent.click(autocompleteSelection);
 
-    // Click submit button
     const submitButton = screen.getByText(
       `Discover the best dishes at ${mockRestaurantData.name}`
     );
@@ -197,5 +200,33 @@ describe("App Component", () => {
     });
 
     consoleErrorSpy.mockRestore();
+  });
+
+  it("disables place search during loading", async () => {
+    mockedRestaurantService.getBestDishes.mockReturnValue(
+      new Promise(() => {})
+    );
+
+    render(<App />);
+
+    const autocompleteSelection = screen.getByTestId("autocomplete-button");
+    await userEvent.click(autocompleteSelection);
+
+    const submitButton = screen.getByText(
+      `Discover the best dishes at ${mockRestaurantData.name}`
+    );
+    await userEvent.click(submitButton);
+
+    // Check that the input element is disabled (which it should be because user has
+    // clicked submit and the Promise does not resolve)
+    const inputElement = screen.getByRole("textbox");
+    expect(inputElement).toBeDisabled();
+
+    // Verify loading component appears with correct restaurant name
+    expect(
+      screen.getByText(
+        `Analyzing the best dishes at ${mockRestaurantData.name}...`
+      )
+    ).toBeInTheDocument();
   });
 });

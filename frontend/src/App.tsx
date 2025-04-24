@@ -58,7 +58,10 @@ const App = () => {
             <AdvancedMarker ref={markerRef} position={null} />
             <MapControl position={ControlPosition.TOP}>
               <div className="autocomplete-control">
-                <PlaceAutocomplete onPlaceSelect={setSelectedPlace} />
+                <PlaceAutocomplete
+                  onPlaceSelect={setSelectedPlace}
+                  disabled={loading}
+                />
               </div>
             </MapControl>
             <MapHandler

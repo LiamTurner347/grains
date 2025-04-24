@@ -111,12 +111,18 @@ describe("Loading Component", () => {
   });
 
   it("resets messages when restaurant name changes", () => {
+    // Deconstruct the `rerender` function that allows updating props of rendered components
     const { rerender } = render(<Loading selectedPlaceName="Robinsons Cafe" />);
 
     // Fast-forward 10 seconds to get to the third message
     act(() => {
       vi.advanceTimersByTime(10000);
     });
+
+    // Should show third message
+    expect(
+      screen.getByText("Checking top-rated dishes loved by locals...")
+    ).toBeInTheDocument();
 
     // Change the restaurant name
     rerender(<Loading selectedPlaceName="The Pig and Pastry" />);

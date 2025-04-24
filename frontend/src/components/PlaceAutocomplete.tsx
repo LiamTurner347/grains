@@ -60,8 +60,6 @@ const PlaceAutocomplete = ({
     <div className="autocomplete-container">
       <input
         ref={inputRef}
-        // placeholder={disabled ? "Loading..." : "Search for a restaurant"}
-        // className={disabled ? "input-disabled" : ""}
       />
     </div>
   );

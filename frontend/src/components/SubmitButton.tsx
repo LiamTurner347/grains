@@ -11,7 +11,7 @@ const SubmitButton = ({
 }: SubmitButtonProps) => {
   const buttonText = selectedPlaceName
     ? `Discover the best dishes at ${selectedPlaceName}`
-    : "Discover the best dishes!";
+    : "";
 
   const isButtonDisabled = !selectedPlaceName || !selectedPlaceId;
 

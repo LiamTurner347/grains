@@ -17,6 +17,8 @@ Grains provides intelligent dish recommendations by analyzing Google Maps restau
 - **Caching**: Redis
 - **Validation**: Zod for standardized LLM output validation
 - **Data Source**: Apify
+- **Testing**: Vitest, jest-dom
+- **Animation**: motion-framer, browser `scrollIntoView`
 
 ## Prerequisites
 

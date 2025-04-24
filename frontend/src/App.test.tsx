@@ -152,7 +152,6 @@ describe("App Component", () => {
 
     // Wait for dishes to load
     await waitFor(() => {
-      console.log("Current DOM:", document.body.innerHTML);
       expect(screen.getByText(mockRestaurantData.name)).toBeInTheDocument();
       expect(screen.getByText("Truffle Mushroom Toast")).toBeInTheDocument();
       expect(
